@@ -9,12 +9,7 @@ void scale_setup() {
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_offset(-12532);
   scale.set_scale(471.197333333);
-}
-
-void scale_reset(void *unused) {
-  Serial.print("Resetting scale...");
   scale.tare();
-  Serial.println(" done");
 }
 
 void scale_read(void *unused) {

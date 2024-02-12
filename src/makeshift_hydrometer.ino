@@ -4,29 +4,10 @@
 #include "eventsys.h"
 #include "scale.h"
 #include "thermometer.h"
-#include "per_button_press.h"
 #include "per_milliseconds.h"
 #include "mh_lcd.h"
 
 Event_Sys events;
-
-// setup the button reset event
-Button_Last_Pressed scale_reset_button_tracker = {
-  .time = 0,
-  .state = LOW
-};
-Trigger reset_scale_trigger = {
-  .check = per_button_push,
-  .data = &scale_reset_button_tracker
-};
-Action reset_scale_action = {
-  .do_action = scale_reset,
-  .data = NULL
-};
-Event reset_scale_button = {
-  .trigger = reset_scale_trigger,
-  .action = reset_scale_action
-};
 
 // setup the scale read event
 Per_Time_Data scale_per_seconds_tracker = {
@@ -85,15 +66,13 @@ Event update_lcd_per_milliseconds = {
 void setup() {
   Serial.begin(57600);
   init_event_sys(&events);
+
   scale_setup();
   add_event(&events, &read_scale_per_milliseconds);
 
   thermometer_setup();
   add_event(&events, &read_thermometer_per_milliseconds);
   
-  button_setup();
-  add_event(&events, &reset_scale_button);
-
   mh_lcd_setup();
   add_event(&events, &update_lcd_per_milliseconds);
 }
