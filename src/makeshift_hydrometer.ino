@@ -80,17 +80,4 @@ void setup() {
 long log_flag = 0;
 void loop() {
   check_events(&events);
-  /*
-  if (millis() % 1000 == 0) {
-    if (log_flag == 0) {
-      log_flag = millis();
-      say_hello_per_second.action();
-      events.head_event->action();
-      check_events(&events);
-    }
-  }
-  else {
-    log_flag = 0;
-  }
-  */
 }
