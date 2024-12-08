@@ -13,10 +13,8 @@ void thermometer_setup() {
 }
 
 void thermometer_read(void *unused) {
-  Serial.print("Reading Thermometer...");
   dt.requestTemperatures();
   thermometer_value = dt.getTempCByIndex(0);
-  Serial.println(" done");
 }
 
 float thermometer_get_value() {

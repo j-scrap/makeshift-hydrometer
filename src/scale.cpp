@@ -13,11 +13,9 @@ void scale_setup() {
 }
 
 void scale_read(void *unused) {
-  Serial.print("Reading scale...");
   if (scale.is_ready()) {
     scale_value = scale.get_units(10);
   }
-  Serial.println(" done");
 }
 
 float scale_get_value() {
